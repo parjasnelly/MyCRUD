@@ -1,0 +1,11 @@
+table {
+  margin: auto;
+  width: 80%;
+}
+button{
+  margin: 5px;
+}
+.example-container {
+  height: 80%;
+  overflow: auto;
+}
