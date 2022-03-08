@@ -1,14 +1,6 @@
-import {Component} from '@angular/core';
+import { User } from './models/user.model';
 
-export interface PeriodicElement {
-  name: string;
-  age: number;
-  street: string;
-  number: number;
-  cep: number;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
+const users: User[] = [
   {
     "name": "Compton Franco",
     "age": 29,
@@ -102,24 +94,21 @@ const ELEMENT_DATA: PeriodicElement[] = [
     "cep": 4876
   }
 ];
+export class UserServer {
 
-/**
- * @title Basic use of `<table mat-table>`
- */
-@Component({
-  selector: 'app-user-list',
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css']
-})
-export class UserList {
-  displayedColumns: string[] = ['name', 'age', 'street','number', 'cep', 'buttons'];
-  dataSource = ELEMENT_DATA;
+  constructor() { }
 
-  onEditUser(){
-    // Lógica para editar user
+  addUser(user: User){
+
   }
 
-  onDeleteUser(){
-    // Lógica para remover user
+  getUsers(){
+    return users.slice();
   }
+
+  deleteUser(user: User){
+
+  }
+
+
 }
