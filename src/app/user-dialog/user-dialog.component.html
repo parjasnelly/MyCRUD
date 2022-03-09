@@ -1,1 +1,38 @@
-<p>user-dialog works!</p>
+<h1 mat-dialog-title>{{ !isChange ? "Create User" : "Edit User" }}</h1>
+<div mat-dialog-content>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Nome</mat-label>
+    <input matInput [(ngModel)]="data.name" required/>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Número</mat-label>
+    <input matInput [(ngModel)]="data.phoneNumber" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>E-mail</mat-label>
+    <input matInput mask="99999-999" [(ngModel)]="data.email" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Endereço</mat-label>
+    <input matInput [(ngModel)]="data.address" required />
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onHandleCancelClick()">Cancel</button>
+  <button
+    mat-button
+    *ngIf="!isChange"
+    [mat-dialog-close]="data"
+    cdkFocusInitial
+  >
+    Create
+  </button>
+  <button mat-button *ngIf="isChange" [mat-dialog-close]="data" cdkFocusInitial>
+    Edit
+  </button>
+</div>

@@ -13,12 +13,17 @@ export class HeaderComponent {
 
     openDialog() {
 
-        const dialogConfig = new MatDialogConfig();
-
-        dialogConfig.disableClose = true;
-        dialogConfig.autoFocus = true;
-
-        this.dialog.open(UserDialogComponent, dialogConfig);
+      const newUser = {
+        username: null,
+        age: null,
+        cep: null,
+        street: null,
+        number: null,
+      };
+      const dialogRef = this.dialog.open(UserDialogComponent, {
+        width: '250px',
+        data: newUser,
+      });
     }
 
   onAddUser(){
