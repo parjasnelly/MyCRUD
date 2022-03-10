@@ -23,13 +23,35 @@ export class UserList implements OnInit {
 
   }
 
+onAddUser(){
+  console.log("AddUser button pressed")
+  const newUser = {
+    name : null,
+    email : null,
+    phoneNumber : null,
+    address : null,
+  };
+  const dialogRef = this.dialog.open(UserDialogComponent, {
+    width: '250px',
+    data: newUser,
+  });
+  dialogRef.afterClosed().subscribe((result) => {
+    this.userServer.createUser(result).subscribe(() => {
+      this.updateList();
+    });
+
+  });
+  this.updateList();
+
+}
+
   ngOnInit(): void {
     this.updateList();
   }
 
   updateList(){
     this.userServer.getAllUsers().subscribe((data: UserResponse) => {
-      this.dataSource = data.data;
+      this.dataSource = data.data.sort((a: User, b:User)=> 0 - (a.id < b.id ? 1 : -1));
     });
   }
 

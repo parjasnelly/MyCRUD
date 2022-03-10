@@ -16,11 +16,13 @@ export class UserServer {
   }
 
   createUser(user: User): Observable<UserResponse> {
+    console.log(user + "service")
     return this.http.post<UserResponse>(APIurl, user);
   }
 
   editUser(user: User): Observable<UserResponse> {
-    return this.http.put<UserResponse>(APIurl, user);
+    console.log(user)
+    return this.http.put<UserResponse>(`${APIurl}/${user.id}`, user);
   }
 
   deleteUser(id: number): Observable<UserResponse['message']> {
