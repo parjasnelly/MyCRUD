@@ -1,6 +1,10 @@
 <h1 md-dialog-title>Apagar Usuário</h1>
-<div md-dialog-content>{{confirmMessage}}</div>
+<div md-dialog-content>{{ confirmMessage }}</div>
 <div md-dialog-actions>
-  <button mat-raised-button color ='warn' (click)="dialogRef.close(true)">Sim, desejo remover!</button>
-  <button mat-raised-button (click)="dialogRef.close(false)">Não, cancelar!</button>
+  <button mat-raised-button color="warn" (click)="dialogRef.close(true)">
+    Sim, desejo remover!
+  </button>
+  <button mat-raised-button (click)="dialogRef.close(false)">
+    Não, cancelar!
+  </button>
 </div>

@@ -1,37 +1,71 @@
 <h1 mat-dialog-title>{{ !isChange ? "Create User" : "Edit User" }}</h1>
 <div mat-dialog-content>
-
   <mat-form-field appearance="fill">
     <mat-label>Nome</mat-label>
-    <input matInput [(ngModel)]="data.name" name="name" required #nameCtrl="ngModel"/>
+    <input
+      matInput
+      [(ngModel)]="data.name"
+      name="name"
+      required
+      #nameCtrl="ngModel"
+    />
     <mat-error *ngIf="nameCtrl.invalid">Campo Obrigatório!</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Número</mat-label>
-    <input matInput [(ngModel)]="data.phoneNumber"  name="phone" required #phoneCtrl="ngModel"/>
+    <input
+      matInput
+      mask="(00) 0 000-00009"
+      [dropSpecialCharacters]="false"
+      [(ngModel)]="data.phoneNumber"
+      name="phone"
+      required
+      #phoneCtrl="ngModel"
+    />
     <mat-error *ngIf="phoneCtrl.invalid">Campo Obrigatório!</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>E-mail</mat-label>
-    <input matInput [formControl]="email" [(ngModel)]="data.email" name="email" required>
-    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+    <input
+      matInput
+      [formControl]="email"
+      [(ngModel)]="data.email"
+      name="email"
+      required
+    />
+    <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Endereço</mat-label>
-    <input matInput [(ngModel)]="data.address" required name="address" #addressCtrl="ngModel"/>
+    <input
+      matInput
+      [(ngModel)]="data.address"
+      required
+      name="address"
+      #addressCtrl="ngModel"
+    />
     <mat-error *ngIf="addressCtrl.invalid">Campo Obrigatório!</mat-error>
   </mat-form-field>
-
 </div>
 <div mat-dialog-actions>
   <button
-  mat-raised-button color="confirmation" [mat-dialog-close]="data" [disabled]="nameCtrl.invalid ||nameCtrl.invalid ||phoneCtrl.invalid||addressCtrl.invalid||email.invalid">
+    mat-raised-button
+    color="confirmation"
+    [mat-dialog-close]="data"
+    [disabled]="
+      nameCtrl.invalid ||
+      nameCtrl.invalid ||
+      phoneCtrl.invalid ||
+      addressCtrl.invalid ||
+      email.invalid
+    "
+  >
     Confirmar
   </button>
-  <button mat-raised-button color="warn" (click)="onHandleCancelClick()" >Cancelar</button>
-
+  <button mat-raised-button color="warn" (click)="onHandleCancelClick()">
+    Cancelar
+  </button>
 </div>
-

@@ -6,10 +6,9 @@ import { User } from '../models/user.model';
 @Component({
   selector: 'app-user-dialog',
   templateUrl: './user-dialog.component.html',
-  styleUrls: ['./user-dialog.component.css']
+  styleUrls: ['./user-dialog.component.css'],
 })
 export class UserDialogComponent implements OnInit {
-
   User!: User;
   isChange!: boolean;
 
@@ -26,7 +25,9 @@ export class UserDialogComponent implements OnInit {
       return 'Campo Obrigatório';
     }
 
-    return this.email.hasError('email') ? 'Por Favor, insira um email válido!' : '';
+    return this.email.hasError('email')
+      ? 'Por Favor, insira um email válido!'
+      : '';
   }
   ngOnInit(): void {
     if (this.data.id != null) this.isChange = true;
@@ -35,5 +36,4 @@ export class UserDialogComponent implements OnInit {
   onHandleCancelClick(): void {
     this.dialogRef.close();
   }
-
 }
