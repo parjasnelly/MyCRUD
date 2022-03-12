@@ -1,5 +1,5 @@
 import { User } from './user.model'
-export interface UserResponse {
+export interface UserAPIResponse {
   message: string;
   data: User[];
 }

@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>{{ !isChange ? "Create User" : "Edit User" }}</h1>
+<h1 mat-dialog-title>{{ formTittle }}</h1>
 <div mat-dialog-content>
   <mat-form-field appearance="fill">
     <mat-label>Nome</mat-label>
@@ -9,6 +9,7 @@
       required
       #nameCtrl="ngModel"
     />
+    <mat-icon matSuffix>person</mat-icon>
     <mat-error *ngIf="nameCtrl.invalid">Campo Obrigatório!</mat-error>
   </mat-form-field>
 
@@ -23,6 +24,7 @@
       required
       #phoneCtrl="ngModel"
     />
+    <mat-icon matSuffix>phone</mat-icon>
     <mat-error *ngIf="phoneCtrl.invalid">Campo Obrigatório!</mat-error>
   </mat-form-field>
 
@@ -35,6 +37,7 @@
       name="email"
       required
     />
+    <mat-icon matSuffix>mail</mat-icon>
     <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
   </mat-form-field>
 
@@ -47,6 +50,7 @@
       name="address"
       #addressCtrl="ngModel"
     />
+    <mat-icon matSuffix> place</mat-icon>
     <mat-error *ngIf="addressCtrl.invalid">Campo Obrigatório!</mat-error>
   </mat-form-field>
 </div>
@@ -65,7 +69,7 @@
   >
     Confirmar
   </button>
-  <button mat-raised-button color="warn" (click)="onHandleCancelClick()">
+  <button mat-raised-button color="warn" (click)="onCancel()">
     Cancelar
   </button>
 </div>

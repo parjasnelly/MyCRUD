@@ -10,13 +10,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
-import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { NgxMaskModule } from 'ngx-mask'
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { UserList } from './user-list/user-list.component';
 import { UserDialogComponent } from './user-dialog/user-dialog.component';
-import { UserServer } from './user-server.service';
+import { UserServer } from './service/user-server.service';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
@@ -38,8 +39,9 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     FormsModule,
     MatInputModule,
     HttpClientModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     MatIconModule,
+    MatSnackBarModule,
     NgxMaskModule.forRoot(),
   ],
   providers: [UserServer],

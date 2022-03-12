@@ -9,9 +9,7 @@ import { User } from '../models/user.model';
   styleUrls: ['./user-dialog.component.css'],
 })
 export class UserDialogComponent implements OnInit {
-  User!: User;
-  isChange!: boolean;
-
+  formTittle!: String;
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: User,
@@ -25,15 +23,17 @@ export class UserDialogComponent implements OnInit {
       return 'Campo Obrigatório';
     }
 
-    return this.email.hasError('email')
-      ? 'Por Favor, insira um email válido!'
-      : '';
+    return this.email.hasError('email') ? 'Por Favor, insira um email válido!' : '';
   }
   ngOnInit(): void {
-    if (this.data.id != null) this.isChange = true;
+    if (this.data.id != null) {
+      this.formTittle = "Editar Usuário";
+    } else {
+      this.formTittle = "Adicionar Usuário";
+    }
   }
 
-  onHandleCancelClick(): void {
+  onCancel(): void {
     this.dialogRef.close();
   }
 }

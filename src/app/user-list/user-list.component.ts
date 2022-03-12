@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
-import { UserResponse } from '../models/serverResponse.model';
+import { UserAPIResponse } from '../models/UserAPIResponse.model';
 import { User } from '../models/user.model';
 import { UserDialogComponent } from '../user-dialog/user-dialog.component';
 
-import { UserServer } from '../user-server.service';
+import { UserServer } from '../service/user-server.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-list',
@@ -24,7 +25,7 @@ export class UserList implements OnInit {
   userServer: UserServer;
   dataSource: User[] = [];
 
-  constructor(userServer: UserServer, public dialog: MatDialog) {
+  constructor(userServer: UserServer, public dialog: MatDialog, private snackBar: MatSnackBar) {
     this.userServer = userServer;
   }
 
@@ -33,40 +34,50 @@ export class UserList implements OnInit {
   }
 
   onAddUser() {
-    const newUser = {
-      name: null,
-      email: null,
-      phoneNumber: null,
-      address: null,
-    };
+
     const dialogRef = this.dialog.open(UserDialogComponent, {
-      width: '250px',
-      data: newUser,
+      width: '300px',
+      data: {
+        name: null,
+        email: null,
+        phoneNumber: null,
+        address: null,
+      }
     });
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
       if (result) {
-        this.userServer.createUser(result).subscribe(() => {
+        this.userServer.addUser(result).subscribe(() => {
           this.updateList();
+          this.snackBar.open("Usuário adicionado com sucesso!", undefined, {
+            duration: 1500,
+            verticalPosition: 'top',
+            horizontalPosition: 'center',
+          } );
         });
       }
+
     });
   }
 
   updateList() {
-    this.userServer.getAllUsers().subscribe((data: UserResponse) => {
+    this.userServer.getAllUsers().subscribe((data: UserAPIResponse) => {
       this.dataSource = data.data;
     });
   }
 
   onEditUser(user: User) {
     const dialogRef = this.dialog.open(UserDialogComponent, {
-      width: '250px',
+      width: '300px',
       data: { ...user },
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.editUser(result);
+        this.snackBar.open("Usuário editado com sucesso!", undefined, {
+          duration: 1500,
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+        } );
       }
     });
   }
@@ -86,6 +97,11 @@ export class UserList implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.deleteUser(user.id);
+        this.snackBar.open("Usuário excluído com sucesso!", undefined, {
+          duration: 1500,
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+        } );
       }
     });
   }

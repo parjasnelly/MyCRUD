@@ -5,7 +5,13 @@ table {
 button{
   margin: 5px;
 }
-.example-container {
+.container {
   height: 80%;
   overflow: auto;
+}
+.add-button{
+  margin-left: 100px;
+}
+.mat-confirmation {
+  background-color: green;
 }
